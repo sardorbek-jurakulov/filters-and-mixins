@@ -6,7 +6,7 @@
                 <!-- Exercise 1) -->
                 <!-- Build a local Filter which reverses the Text it is applied on -->
                 <h3>Name reverser</h3>
-                <input type="text" name="userName" v-model.lazy="userName" placeholder="Your name here">
+                <input type="text" v-model.lazy="userName" placeholder="Your name here">
                 
                 <!-- Reversed version of your Name is: {{ userName | nameReverser }} -->
                 
@@ -24,22 +24,28 @@
                 <!-- Do the same as in Exercises 1 & 2, now with Computed Properties -->
                 <div v-if="userName != ''">
                   Reversed version of your Name is: {{ nameReverserComputed }}
-                  <br><hr><br>
-                  Your Name info: {{ stringLengthCounterComputed }}
+                  <!-- <br><hr><br>
+                  Your Name info: {{ stringLengthCounterComputed }} -->
                 </div>
 
                 <!-- Exercise 4 -->
                 <!-- Share the Computed Property rebuilding Exercise 2 via a Mixin -->
+                <div v-if="userName != ''">
+                  <br><hr><br>
+                  Your Name info: {{ stringLengthFinderComponent }}
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import { stringLengthFinderComponent } from './StringLengthFinderComponent';
     export default {
+      mixins: [stringLengthFinderComponent],
       data() {
         return {
-          userName: '',
+          userName: ''
         }
       },
       filters: {
@@ -54,7 +60,7 @@
         stringLengthCounterComputed() {
           return this.userName + " " + "(" + this.userName.length + ")";
         }
-      }
+      },
     }
 </script>
 
